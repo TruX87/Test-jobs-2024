@@ -2,45 +2,48 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button } from 'react-bootstrap';
 import '../../assets/css/shipment-table.css';
-
+import shipmentsFile from "../../data/shipments.json";
+ 
 function ShipmentTable() {
   const [shipments, setShipments] = useState([]);
-  const [selectedShipment, setSelectedShipment] = useState(null);
+  const [selectedShipment, setSelectedShipment] = useState(-1);
   const [showModal, setShowModal] = useState(false);
   const [updatedShipment, setUpdatedShipment] = useState(null);
-
+ 
   useEffect(() => {
-    fetch('/shipments.json')
+    fetch("https://my.api.mockaroo.com/shipments.json?key=5e0b62d0")
       .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
         return response.json();
       })
       .then(data => {
-        console.log('Fetched data:', data);
-        setShipments(data);
+        if (data.error) {
+          setShipments(shipmentsFile);
+          console.log(data.error.message);
+          // setMessage(data.error);
+        } else {
+          console.log('Fetched data:', data);
+          setShipments(data);
+        }      
       })
-      .catch(error => console.error('There was a problem with the fetch operation:', error));
   }, []);
-
-  const handleSelectShipment = (shipment) => {
+ 
+  const handleSelectShipment = (shipment, index) => {
     console.log('Selected shipment:', shipment);
-    setSelectedShipment(shipment);
+    setSelectedShipment(index);
     setUpdatedShipment({ ...shipment });
     setShowModal(true);
   };
-
+ 
   const handleCloseModal = () => {
     setShowModal(false);
-    setSelectedShipment(null);
+    setSelectedShipment(-1);
   };
-
+ 
   const handleDeleteShipment = (orderNo) => {
     const updatedShipments = shipments.filter(shipment => shipment.orderNo !== orderNo);
     setShipments(updatedShipments);
   };
-
+ 
   const handleUpdateChange = (e) => {
     const { name, value } = e.target;
     setUpdatedShipment(prevState => ({
@@ -48,17 +51,20 @@ function ShipmentTable() {
       [name]: value,
     }));
   };
-
+ 
   const handleSaveChanges = () => {
-    const updatedShipments = shipments.map(shipment =>
-      shipment.orderNo === updatedShipment.orderNo ? updatedShipment : shipment
-    );
-    setShipments(updatedShipments);
+    // EI KÄI 25 000 korda läbi
+    // const updatedShipments = shipments.map(shipment =>
+    //   shipment.orderNo === updatedShipment.orderNo ? updatedShipment : shipment
+    // );
+    // muudab otse seda, keda on vaja muuta järjekorranumbri abil
+    shipments[selectedShipment] = updatedShipment;
+    setShipments(shipments.slice());
     setShowModal(false);
   };
-
+ 
   console.log('Current selectedShipment state:', selectedShipment);
-
+ 
   return (
     <div>
       <table className="table table-striped">
@@ -83,7 +89,7 @@ function ShipmentTable() {
               <td>{shipment.status}</td>
               <td>{shipment.consignee}</td>
               <td>
-                <button className="btn btn-info" onClick={() => handleSelectShipment(shipment)}>
+                <button className="btn btn-info" onClick={() => handleSelectShipment(shipment, index)}>
                   <img className='btn-icon' src="/shipment-detail.png" alt="details button" />
                 </button>
                 <button className="btn btn-danger" onClick={() => handleDeleteShipment(shipment.orderNo)}>x</button>
@@ -92,8 +98,8 @@ function ShipmentTable() {
           ))}
         </tbody>
       </table>
-
-      {selectedShipment && (
+ 
+      {selectedShipment >= 0 && (
         <Modal show={showModal} onHide={handleCloseModal} centered>
           <Modal.Header closeButton>
             <Modal.Title>Shipment Details</Modal.Title>
@@ -169,5 +175,5 @@ function ShipmentTable() {
     </div>
   );
 }
-
+ 
 export default ShipmentTable;
