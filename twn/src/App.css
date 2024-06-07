@@ -1,0 +1,23 @@
+.page {
+  /* background-image: url(/public/bg-deco-left.svg), url(/public/bg-deco-right.svg);
+  background-color: #3a3d57;
+  background-repeat: no-repeat;
+  background-position: 220px bottom, 100% 0;
+  background-size: 150px, 250px;
+  background-attachment: fixed;
+  display: block;
+  margin-left: 220px;
+  height: 100vh;
+  overflow: auto; */
+  background-image: url(/public/bg-deco-left.svg), url(/public/bg-deco-right.svg);
+  background-color: #3a3d57;
+  background-repeat: no-repeat;
+  background-position: 220px bottom, 100% 0;
+  background-size: 150px, 250px;
+  background-attachment: fixed;
+  display: block;
+  margin-left: 220px;
+  height: 100vh;
+  overflow: auto;
+  padding: 5rem 2.5rem;
+}

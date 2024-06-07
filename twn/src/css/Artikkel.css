@@ -1,0 +1,43 @@
+.artikkel {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  color: #ffffff;
+  border-radius: 8px;
+}
+
+.artikkel h1 {
+    font-size: 33px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  .artikkel .intro, .artikkel .body {
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .artikkel_image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .tags {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 10px;
+  }
+  
+  .tag {
+    background-color: #ff57a2;
+    padding: 5px 10px;
+    border-radius: 2rem;
+    margin: 10px 10px 10px 0;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2em;
+  }
