@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #ffffff;
+    --primary-color: #fff;
     --secondary-color: #333;
     --disabled-color: #898b9a;
     --border-color: #4b5e77;
@@ -88,12 +88,12 @@
             background-color: #16a085; 
         }
     }
-    .expanded-row-content {
+    .expandedRowContent {
       display: flex;
       align-items: center;
     }
   
-    .expanded-row-text {
+    .expandedRowText {
       padding-left: var(--spacing);
     }
   
