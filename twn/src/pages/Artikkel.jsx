@@ -31,7 +31,7 @@ function Artikkel() {
   }
 
   if (!article) {
-    return <div>Loading...</div>;
+    return <div>Laeb...</div>;
   }
 
   return (
