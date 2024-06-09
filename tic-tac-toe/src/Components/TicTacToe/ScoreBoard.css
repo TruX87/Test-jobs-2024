@@ -1,0 +1,25 @@
+.SBcontainer {
+    text-align: center;
+    color: white;
+}
+
+.SBtitle {
+    margin-top: 50px;
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SBtable {
+    width: 80%;
+    border-collapse: collapse;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }

@@ -1,4 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useContext } from 'react'
+import { GameContext } from '../../App';
+import { useLocation } from 'react-router-dom';
 import './TicTacToe.css'
 import circle_icon from '../Assets/circle.png'
 import cross_icon from '../Assets/cross.png'
@@ -22,6 +24,8 @@ let box9 = useRef(null);
 
 let box_array = [box1,box2,box3,box4,box5,box6,box7,box8,box9];
 
+const location = useLocation();
+const { player1 = "Player 1", player2 = "Player 2" } = location.state || {};
 
 const toggle = (e, num) => {
     if (lock) {
@@ -39,6 +43,7 @@ const toggle = (e, num) => {
     }
     checkWin();
 }
+
 
 const checkWin = (winner) => {
     if (data[0] === data[1] && data[1] === data[2] && data[2] !== "") {
@@ -78,7 +83,10 @@ const won = (winner) => {
     else {
         titleRef.current.innerHTML = `Congratulations: <img src=${circle_icon}> wins!`;
     }
+    addGameToHistory({ player1, player2, winner });
 }
+const { addGameToHistory } = useContext(GameContext);
+
 
 const reset = () => {
     setLock(false);
