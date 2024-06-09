@@ -73,10 +73,10 @@ const checkWin = (winner) => {
 const won = (winner) => {
     setLock(true);
     if (winner === "x") {
-        titleRef.current.innerHTML = `Congratulations: <img src=${cross_icon}> won!`;
+        titleRef.current.innerHTML = `Congratulations: <img src=${cross_icon}> wins!`;
     }
     else {
-        titleRef.current.innerHTML = `Congratulations: <img src=${circle_icon}>won!`;
+        titleRef.current.innerHTML = `Congratulations: <img src=${circle_icon}> wins!`;
     }
 }
 
